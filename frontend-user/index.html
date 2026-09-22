@@ -103,6 +103,43 @@
         </div>
     </div>
 
+    <!-- 批量套用确认模态框 -->
+    <div id="batch-apply-modal" class="modal-overlay hidden">
+        <div class="modal batch-apply-modal">
+            <div class="modal-header">
+                <h3>批量套用参数</h3>
+            </div>
+            <div class="modal-body">
+                <div class="batch-source" id="batch-source-params"></div>
+                <div class="batch-section">
+                    <h4 class="batch-section-title">
+                        将改动的透镜
+                        <span class="batch-section-count" id="batch-changed-count">(0)</span>
+                    </h4>
+                    <div class="batch-lens-list" id="batch-changed-list"></div>
+                </div>
+                <div class="batch-section">
+                    <h4 class="batch-section-title">
+                        将跳过的透镜
+                        <span class="batch-section-count" id="batch-skipped-count">(0)</span>
+                    </h4>
+                    <div class="batch-lens-list" id="batch-skipped-list"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="btn-batch-cancel">
+                    <span>取消</span>
+                </button>
+                <button class="btn btn-primary" id="btn-batch-confirm">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                    <span>确认套用</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- 欢迎引导遮罩 -->
     <div id="guide-overlay" class="guide-overlay hidden">
         <div class="guide-modal">
@@ -252,6 +289,13 @@
                             </svg>
                             <span>重置</span>
                         </button>
+                        <button class="btn btn-tool" id="btn-batch-apply" title="将选中透镜的参数批量套用到其他透镜" disabled>
+                            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="9" y="9" width="13" height="13" rx="2"/>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                            </svg>
+                            <span>批量套用</span>
+                        </button>
                     </div>
                     <div class="toolbar-center">
                         <select class="select-light-mode" id="select-light-mode">
@@ -331,6 +375,13 @@
                         <div class="param-actions">
                             <button class="btn btn-secondary" id="btn-reset-lens">重置参数</button>
                             <button class="btn btn-danger" id="btn-delete-lens">删除透镜</button>
+                        </div>
+                        <div class="batch-result hidden" id="batch-result">
+                            <div class="batch-result-header">
+                                <h3 class="batch-result-title">批量套用结果</h3>
+                                <button class="btn btn-text btn-sm" id="btn-batch-clear">清除</button>
+                            </div>
+                            <div class="batch-result-list" id="batch-result-list"></div>
                         </div>
                     </div>
                 </div>
