@@ -166,8 +166,9 @@ class CanvasManager {
     addLens(lens) {
         this.lenses.push(lens);
         this.renderer.setLenses(this.lenses);
+        this.notifyLensesChanged();
     }
-    
+
     removeLens(lens) {
         const index = this.lenses.indexOf(lens);
         if (index > -1) {
@@ -176,6 +177,7 @@ class CanvasManager {
                 this.deselectLens();
             }
             this.renderer.setLenses(this.lenses);
+            this.notifyLensesChanged();
         }
     }
     
@@ -207,6 +209,17 @@ class CanvasManager {
         this.isDragging = false;
         this.renderer.setLenses([]);
         this.renderer.render();
+        this.notifyLensesChanged();
+    }
+
+    /**
+     * 通知透镜列表发生变化（新增/删除/清空）
+     * 触摸设备点击添加与拖拽添加都会经过 addLens，因此都会触发该事件
+     */
+    notifyLensesChanged() {
+        window.dispatchEvent(new CustomEvent('lensesChanged', {
+            detail: { count: this.lenses.length }
+        }));
     }
     
     getRenderer() {

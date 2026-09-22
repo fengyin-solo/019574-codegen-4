@@ -103,6 +103,44 @@
         </div>
     </div>
 
+    <!-- 批量套用确认模态框 -->
+    <div id="batch-apply-modal" class="modal-overlay hidden">
+        <div class="modal batch-apply-modal">
+            <div class="modal-header">
+                <h3>批量套用参数</h3>
+            </div>
+            <div class="modal-body">
+                <p class="batch-desc">将选中透镜的以下参数套用到其他透镜：</p>
+                <div class="batch-params-summary" id="batch-params-summary"></div>
+                <div class="batch-section">
+                    <h4 class="batch-section-title batch-title-apply">
+                        <span class="batch-title-icon">✓</span>
+                        <span>会改动的透镜（<span id="batch-apply-count">0</span>）</span>
+                    </h4>
+                    <ul class="batch-lens-list" id="batch-apply-list"></ul>
+                </div>
+                <div class="batch-section">
+                    <h4 class="batch-section-title batch-title-skip">
+                        <span class="batch-title-icon">⊘</span>
+                        <span>会被跳过的透镜（<span id="batch-skip-count">0</span>）</span>
+                    </h4>
+                    <ul class="batch-lens-list" id="batch-skip-list"></ul>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="btn-batch-cancel">
+                    <span>取消</span>
+                </button>
+                <button class="btn btn-primary" id="btn-batch-confirm">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                    <span>确认套用</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- 欢迎引导遮罩 -->
     <div id="guide-overlay" class="guide-overlay hidden">
         <div class="guide-modal">
@@ -260,6 +298,13 @@
                         </select>
                     </div>
                     <div class="toolbar-right">
+                        <button class="btn btn-tool" id="btn-batch-apply" title="将选中透镜的参数套用到其他透镜" disabled>
+                            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                            </svg>
+                            <span>批量套用</span>
+                        </button>
                         <button class="btn btn-tool" id="btn-toggle-labels" title="显示/隐藏标注">
                             <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M4 7V4h16v3"/>
@@ -274,6 +319,11 @@
                     <canvas id="optics-canvas"></canvas>
                     <div class="canvas-drop-hint hidden" id="canvas-drop-hint">
                         <span>拖放透镜到这里</span>
+                    </div>
+                    <div class="batch-result-banner hidden" id="batch-result-banner">
+                        <span class="batch-result-icon">✓</span>
+                        <span class="batch-result-text" id="batch-result-text"></span>
+                        <button class="batch-result-close" id="btn-batch-result-close" title="关闭结果">×</button>
                     </div>
                 </div>
             </section>
